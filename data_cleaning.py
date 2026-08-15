@@ -176,7 +176,60 @@ model = IsolationForest(
 features["anomaly"] = model.fit_predict(X_scaled)
 
 
-######################################################
+#########################################################################################################################################
+########################################################################################################################################
+#######################################################data cleaning for retired people#################################################
+#######################################################################################################################################
+#######################################################################################################################################
+data_retirement=pd.read_excel("data/retired.xlsx")
+
+############information of table#######################
+data_retirement=pd.DataFrame(data_retirement)
+print(data_retirement.info())
+# print(data_retirement.columns)
+# print(data_retirement.dtypes)
+data_retirement["anniuity"] = (
+ data_retirement["anniuity"]
+     .str.replace(",", "", regex=False)
+     .astype(float)
+ )
+print(data_retirement["anniuity"].head())
+
+data_retirement["birth_date_gregorian"] = data_retirement["birthDate"].apply(jalali_to_gregorian)
+
+valuation_data_jalali=jdatetime.date(1404,12,29)
+valuation_date = pd.Timestamp(valuation_data_jalali.togregorian())
+valuation_data_jalali=jdatetime.date(1404,12,29)
+valuation_date = pd.Timestamp(valuation_data_jalali.togregorian())
+data_retirement["age"] = (
+   valuation_date - pd.to_datetime(data_retirement["birth_date_gregorian"])
+ ).dt.days / 365
+#print(data_retirement.columns)
+data_retirement["age"]=data_retirement["age"].astype(int)
+#print(data_retirement.head())
+
+#########################################################################################################################################
+########################################################################################################################################
+#######################################################data cleaning for survivors#################################################
+#######################################################################################################################################
+#######################################################################################################################################
+data_survivor=pd.read_excel("data/survivor.xlsx")
 
 
+############information of table#######################
+data_survivor=pd.DataFrame(data_survivor)
+print(data_survivor.info())
+# print(data_retirement.columns)
+# print(data_retirement.dtypes)
+data_survivor["birth_date_gregorian"] = data_survivor["birthDate"].apply(jalali_to_gregorian)
 
+valuation_data_jalali=jdatetime.date(1404,12,29)
+valuation_date = pd.Timestamp(valuation_data_jalali.togregorian())
+valuation_data_jalali=jdatetime.date(1404,12,29)
+valuation_date = pd.Timestamp(valuation_data_jalali.togregorian())
+data_survivor["age"] = (
+   valuation_date - pd.to_datetime(data_survivor["birth_date_gregorian"])
+ ).dt.days / 365
+#print(data_retirement.columns)
+data_survivor["age"]=data_survivor["age"].astype(int)
+print(data_survivor.dtypes)

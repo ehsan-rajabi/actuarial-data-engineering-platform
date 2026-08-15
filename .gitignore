@@ -3,9 +3,10 @@
 
 # Allow Python files
 !*.py
+!output/*.png
 
 # Allow README
 !README.md
 
 # Allow gitignore itself
-!.gitignore
+!.gitign

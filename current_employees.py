@@ -169,3 +169,40 @@ total_future_permiums_employee=data["future_permiums_employee"].sum()
 print(f"total_future_permiums_employer:{total_future_permiums_employer/1_000_000:.2f} million")
 print(f"total_future_permiums_employee:{total_future_permiums_employee/1_000_000:.2f} million")
 
+###################################################################################################################################
+########################################################liabilites of retired people##########################################
+################################################################################################################################
+from data_cleaning import data_retirement
+from actuarial_functions import liabilities_of_retired_employees
+data_retirement["liabilies"]=data_retirement.apply(
+                                                   lambda row :liabilities_of_retired_employees(
+                                                       gender=row["GenderCode"],
+                                                       age=row["age"],
+                                                       anniuity= row["anniuity"],
+                                                       life_table=life_table,
+                                                       assumptions=assumptions
+                                                   ),axis=1
+)
+total_liabilites_retired_people=data_retirement["liabilies"].sum()
+print(f"total_liabilities_retired_people:{total_liabilites_retired_people/1_000_000:.2f} million")
+###################################################################################################################################
+########################################################liabilites of survivors##########################################
+################################################################################################################################
+from data_cleaning import data_survivor
+from actuarial_functions import liabilities_of_survivors
+data_survivor["liabilies"]=data_survivor.apply(
+                                                   lambda row :liabilities_of_retired_employees(
+                                                       gender=row["GenderCode"],
+                                                       age=row["age"],
+                                                       anniuity= row["anniuity"],
+                                                       life_table=life_table,
+                                                       assumptions=assumptions
+                                                   ),axis=1
+)
+total_liabilites_survivors=data_survivor["liabilies"].sum()
+print(f"total_liabilities_survivors:{total_liabilites_survivors/1_000_000:.2f} million")
+
+new_retirees = (
+    data["distance_to_retirment"].value_counts().sort_index()
+)
+print(new_retirees)
