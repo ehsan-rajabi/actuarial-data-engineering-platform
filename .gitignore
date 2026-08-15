@@ -1,12 +1,16 @@
 # Ignore everything
 *
 
-# Allow Python files
+# Allow  files
 !*.py
 !output/*.png
+!output/
 
 # Allow README
 !README.md
 
 # Allow gitignore itself
 !.gitign
+
+*.xlsx
+*.xls
