@@ -92,8 +92,9 @@ life_table = life_table.sort_values(
 ############################################################################################################
 ###############################preparetion of current employess#############################################
 ############################################################################################################
-data=pd.read_excel("data/current_employees.xlsx")
-
+#data=pd.read_excel("data/current_employees.xlsx")
+from actuarial_platform.read_row_data import current_employees
+data=current_employees
 ############information of table#######################
 #data=pd.DataFrame(data)
 #print(data.info())
@@ -181,8 +182,9 @@ features["anomaly"] = model.fit_predict(X_scaled)
 #######################################################data cleaning for retired people#################################################
 #######################################################################################################################################
 #######################################################################################################################################
-data_retirement=pd.read_excel("data/retired.xlsx")
-
+#data_retirement=pd.read_excel("data/retired.xlsx")
+from actuarial_platform.read_row_data import retired
+data_retirement=retired
 ############information of table#######################
 data_retirement=pd.DataFrame(data_retirement)
 print(data_retirement.info())
@@ -213,8 +215,9 @@ data_retirement["age"]=data_retirement["age"].astype(int)
 #######################################################data cleaning for survivors#################################################
 #######################################################################################################################################
 #######################################################################################################################################
-data_survivor=pd.read_excel("data/survivor.xlsx")
-
+#data_survivor=pd.read_excel("data/survivor.xlsx")
+from actuarial_platform.read_row_data import survivor
+data_survivor=survivor
 
 ############information of table#######################
 data_survivor=pd.DataFrame(data_survivor)
@@ -232,4 +235,3 @@ data_survivor["age"] = (
  ).dt.days / 365
 #print(data_retirement.columns)
 data_survivor["age"]=data_survivor["age"].astype(int)
-print(data_survivor.dtypes)

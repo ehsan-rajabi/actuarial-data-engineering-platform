@@ -1,16 +1,26 @@
-# Ignore everything
-*
+# Environment variables / passwords
+.env
 
-# Allow  files
-!*.py
-!output/*.png
-!output/
+# Python virtual environment
+.venv/
 
-# Allow README
-!README.md
+# Python cache
+__pycache__/
+*.pyc
 
-# Allow gitignore itself
-!.gitign
+# OS files
+.DS_Store
+Thumbs.db
 
+# Real Excel data
 *.xlsx
 *.xls
+
+# Database files
+*.mdf
+*.ldf
+*.bak
+
+# Generated output
+*.png
+

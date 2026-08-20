@@ -206,3 +206,4 @@ new_retirees = (
     data["distance_to_retirment"].value_counts().sort_index()
 )
 print(new_retirees)
+
