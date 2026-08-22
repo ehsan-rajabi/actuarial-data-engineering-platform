@@ -1,6 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
-from database import engine
+from actuarial_platform.database import engine
 
 current_employees = pd.read_sql(
     "SELECT * FROM current_employees",

@@ -1,7 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 
-from import_data import (import_current_employees, import_retired, import_survivor, update_assumptions)
-from schemas import ImportResponse, AssumptionsRequest
+from actuarial_platform.import_data import (import_current_employees, import_retired, import_survivor, update_assumptions)
+from actuarial_platform.schemas import ImportResponse, AssumptionsRequest
 
 
 app = FastAPI(
@@ -133,3 +133,32 @@ def update_assumption_file(
             status_code=500,
             detail=str(e)
         )
+
+#####################################################################################################################################
+###################################################### runing code by api############################################################
+####################################################################################################################################
+from actuarial_platform.write_results import run_valuation
+
+from actuarial_platform.schemas import ValuationResponse
+@app.post("/valuation", response_model=ValuationResponse)
+def valuation():
+    return run_valuation()
+#####################################################################################################################################
+###################################################### showing the results##########################################################
+####################################################################################################################################
+from actuarial_platform.write_results import get_results_final_balance_sheet
+@app.get("/final_balance_sheet")
+def final_balance_sheet():
+    return get_results_final_balance_sheet().to_dict(orient="records")
+from actuarial_platform.write_results import get_results_cash_flow_with_investment
+@app.get("/cash_flow_with_investment")
+def cash_flow_with_investment():
+    return get_results_cash_flow_with_investment().to_dict(orient="records")
+from actuarial_platform.write_results import get_results_cash_flow_without_investment
+@app.get("/cash_flow_without_investment")
+def cash_flow_without_investment():
+    return get_results_cash_flow_without_investment().to_dict(orient="records")
+from actuarial_platform.write_results import get_results_population_projection
+@app.get("/results_population_projection")
+def results_population_projection():
+    return get_results_population_projection().to_dict(orient="records")

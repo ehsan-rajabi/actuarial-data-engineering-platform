@@ -1,44 +1,58 @@
 import pandas as pd
-from database import engine
+from actuarial_platform.database import engine
+
+import pandas as pd
+from actuarial_platform.database import engine
+from actuarial_platform.models import CurrentEmployee,Retired,Survivor
 
 
 def import_current_employees(file):
     df = pd.read_excel(file)
 
+    # Create the table according to the SQLAlchemy model
+    CurrentEmployee.__table__.drop(engine, checkfirst=True)
+    CurrentEmployee.__table__.create(engine)
+
+    # Insert the Excel data into the existing table
     df.to_sql(
         "current_employees",
         con=engine,
-        if_exists="replace",
+        if_exists="append",
         index=False
     )
 
     return len(df)
-
 
 def import_retired(file):
     df = pd.read_excel(file)
 
+    Retired.__table__.drop(engine, checkfirst=True)
+    Retired.__table__.create(engine)
+
     df.to_sql(
         "retired",
         con=engine,
-        if_exists="replace",
+        if_exists="append",
         index=False
     )
 
     return len(df)
-
 
 def import_survivor(file):
     df = pd.read_excel(file)
 
+    Survivor.__table__.drop(engine, checkfirst=True)
+    Survivor.__table__.create(engine)
+
     df.to_sql(
         "survivor",
         con=engine,
-        if_exists="replace",
+        if_exists="append",
         index=False
     )
 
     return len(df)
+
 
 
 from pathlib import Path

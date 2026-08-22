@@ -44,3 +44,8 @@ class AssumptionsRequest(BaseModel):
     interst_rate: float
     current_investment: float
     borrowing_rate: float
+
+class ValuationResponse(BaseModel):
+    status: str
+    total_normal_cost: float
+    total_accrued_liability: float
