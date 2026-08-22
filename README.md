@@ -1,71 +1,147 @@
-Actuarial Data Analytics Platform
+# Actuarial Data Analytics Platform
 
-Overview
+## Overview
 
-This project is a Python-based actuarial and data analytics platform designed to calculate pension liabilities, analyse future trends, extract insights, and support data-driven decision-making.
+This project is an end-to-end actuarial data analytics platform designed for pension fund valuation, population projection, trend analysis, and risk modelling.
 
-The project combines actuarial modelling with modern data analytics and software engineering practices, including data cleaning, automated calculations, ETL processes, database integration, containerization, reporting, and cloud deployment.
+The platform combines actuarial modelling with modern data engineering and software engineering, including Python, SQL Server, FastAPI, Docker, data ingestion, automated calculations, and database integration.
 
-Current Features
+The API receives actuarial input data and assumptions, ingests and stores the data in SQL Server, retrieves the required data for actuarial processing, runs actuarial calculations and projections using Python, stores the calculated results back in SQL Server, and returns the results through the API.
 
-* Employee data cleaning and preparation using Python libraries such as:
-    * Pandas
-    * NumPy
-    * Scikit-learn
-* Mortality and life table data processing
-* Pension actuarial calculations:
-    * Accrued liability
-    * Normal cost
-    * Present value of future benefits
-    * Present value of future contributions
-* Salary projection and discounting models
-* Survival probability calculations
-* Modular Python functions for actuarial calculations
+The entire application is containerized using Docker, creating a reproducible environment for the complete  data pipeline.
 
-Technology Stack
+The Dockerized application includes:
 
-Programming and Analytics
+- FastAPI application
+- Data ingestion
+- Data cleaning and transformation
+- SQL Server integration
+- Actuarial calculation modules
+- Pension liability calculations
+- Normal cost calculations
+- Salary projections
+- Survival probability calculations
+- Retirement projections
+- Survivor projections
+- Population projections
+- Sensitivity analysis
+- Result generation
+- Result storage in SQL Server
+- API-based result retrieval
 
-* Python
-* Pandas
-* NumPy
-* Scikit-learn
-* Jupyter Notebook
+---
 
-Data Engineering (Planned / In Progress)
+# End-to-End Pipeline
 
-* ETL pipeline development
-* SQL database integration
-* Data validation and transformation
+The main purpose of the platform is to automate the complete data workflow.
 
-Software Engineering (Planned / In Progress)
+```text
+                         API Request
+                              |
+                              v
+                    FastAPI Application
+                              |
+                              v
+                       Data Ingestion
+                              |
+                              v
+                     SQL Server Database
+                              |
+                  +-----------+-----------+
+                  |                       |
+                  v                       v
+            Employee Data           Assumptions
+            Retired Data            Life Tables
+            Survivor Data
+                  |                       |
+                  +-----------+-----------+
+                              |
+                              v
+                    Actuarial Processing
+                              |
+                              v
+                  Pension Projection Engine
+                              |
+             +----------------+----------------+
+             |                |                |
+             v                v                v
+         Liability        Population       Sensitivity
+         Projection       Projection        Analysis
+             |                |                |
+             +----------------+----------------+
+                              |
+                              v
+                    Calculation Results
+                              |
+                              v
+                     SQL Server Database
+                              |
+                              v
+                         FastAPI
+                              |
+                              v
+                       JSON Response
 
-* Docker containerization
-* CI/CD automation
-* API development
+# Future Development
 
-Reporting and Visualization (Planned)
+The next stage of the project will focus on transforming the current actuarial platform into a more scalable, production-oriented analytics solution.
 
-* Power BI dashboards
+## AWS Cloud Deployment
 
-Cloud Technologies (Planned)
+The platform will be deployed to Amazon Web Services (AWS), allowing the containerized actuarial API and database environment to operate in a scalable cloud infrastructure.
 
-* Cloud-based data processing and deployment
+Planned technologies and services include:
 
-Purpose
+- Amazon ECS / AWS Fargate
+- Amazon RDS
+- Amazon S3
+- AWS networking and security
+- Cloud-based API deployment
 
-The goal of this project is to demonstrate the integration of actuarial expertise with modern data analytics and software engineering skills.
+The objective is to move the current Docker-based local platform toward a production-style cloud environment.
 
-The platform is being developed as a portfolio project for actuarial analytics, data analyst, business intelligence, and data engineering roles.
+## Power BI Business Intelligence
 
-Future Development
+A Power BI dashboard will be developed to provide an interactive business intelligence layer on top of the actuarial results stored in the database.
 
-Planned improvements include:
+The dashboard will provide visual analysis of:
 
-* SQL database implementation
-* ETL pipeline automation
-* Docker deployment
-* CI/CD workflows
-* Cloud integration
-* Power BI reporting dashboards
-* Automated testing
+- Pension liabilities
+- Normal cost
+- Employee population
+- Retired population
+- Survivor population
+- Population projections
+- Salary trends
+- Age distribution
+- Sensitivity analysis
+- Key actuarial indicators
+
+The goal is to transform actuarial calculations into clear and interactive insights that support actuarial analysis and management decision-making.
+
+## Automated Testing
+
+Automated testing will be introduced to improve the reliability and maintainability of the platform.
+
+Future testing will cover:
+
+- Actuarial calculation functions
+- Data validation
+- API endpoints
+- Database operations
+- Projection models
+- Edge cases and invalid inputs
+
+## CI/CD Automation
+
+A continuous integration and deployment workflow will be implemented using GitHub Actions.
+
+The planned workflow will automatically:
+
+1. Run automated tests
+2. Validate the application
+3. Build Docker images
+4. Push images to a container registry
+5. Deploy updated versions to AWS
+
+

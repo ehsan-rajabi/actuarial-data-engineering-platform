@@ -4,7 +4,7 @@ import numpy as np
 pd.set_option("display.max_rows",None)
 assumptions = {}
 
-with open("assumptions.txt", "r") as file:
+with open("assumptions/assumptions_expected.txt", "r") as file:
    for line in file:
          key, value = line.strip().split("=")
          assumptions[key] = float(value)

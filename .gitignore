@@ -3,14 +3,20 @@
 
 # Python virtual environment
 .venv/
+venv/
 
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
 
 # OS files
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/
+.idea/
 
 # Real Excel data
 *.xlsx
@@ -23,4 +29,3 @@ Thumbs.db
 
 # Generated output
 *.png
-
